@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<title>Wave — Emotional Navigation</title>
+
+
+<link rel="stylesheet" href="https://use.typekit.net/vdi7qxv.css">
+<script async type='text/javascript' src='https://static.klaviyo.com/onsite/js/UYYzSZ/klaviyo.js?company_id=UYYzSZ'></script>
+<script type="text/javascript">!function(){if(!window.klaviyo){window._klOnsite=window._klOnsite||[];try{window.klaviyo=new Proxy({},{get:function(n,i){return"push"===i?function(){var n;(n=window._klOnsite).push.apply(n,arguments)}:function(){for(var n=arguments.length,o=new Array(n),w=0;w<n;w++)o[w]=arguments[w];var t="function"==typeof o[o.length-1]?o.pop():void 0,e=new Promise((function(n){window._klOnsite.push([i].concat(o,[function(i){t&&t(i),n(i)}]))}));return e}}})}catch(n){window.klaviyo=window.klaviyo||[],window.klaviyo.push=function(){var n;(n=window._klOnsite).push.apply(n,arguments)}}}}();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+
+:root {
+  --bg:    #F6F1EA;
+  --ink:   #111111;
+  --blue:  #2318E6;
+  --muted: rgba(17,17,17,0.38);
+  --rule:  rgba(17,17,17,0.09);
+  --card:  #FFFFFF;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* ── PAGE ── */
+.page {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 56px 28px 72px;
+  text-align: center;
+  position: relative;
+}
+
+.page::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 0%, rgba(35,24,230,0.05) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+/* ── LOGO ── */
+.logo {
+  margin-bottom: 14px;
+  opacity: 0;
+  animation: up .6s ease .05s forwards;
+}
+.logo svg { width: 46px; height: auto; display: block; }
+
+/* ── WORDMARK ── */
+.wordmark {
+  font-family: 'p22-mackinac-pro', serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 56px;
+  opacity: 0;
+  animation: up .6s ease .15s forwards;
+}
+
+/* ── HEADLINE ── */
+.hl {
+  font-family: 'p22-mackinac-pro', serif;
+  font-size: clamp(36px, 9.5vw, 58px);
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin-bottom: 18px;
+  max-width: 480px;
+  opacity: 0;
+  animation: up .7s ease .25s forwards;
+}
+.hl em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--blue);
+}
+
+/* ── SUB ── */
+.sub {
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--muted);
+  max-width: 320px;
+  margin: 0 auto 44px;
+  opacity: 0;
+  animation: up .7s ease .35s forwards;
+}
+
+/* ── FORM ── */
+.form-wrap {
+  width: 100%;
+  max-width: 400px;
+  opacity: 0;
+  animation: up .7s ease .45s forwards;
+}
+
+.form-bar {
+  display: flex;
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 50px;
+  padding: 5px 5px 5px 20px;
+  box-shadow: 0 2px 20px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.04);
+  transition: box-shadow .25s, border-color .25s;
+  margin-bottom: 12px;
+}
+.form-bar:focus-within {
+  box-shadow: 0 4px 28px rgba(35,24,230,0.12), 0 1px 4px rgba(0,0,0,0.05);
+  border-color: rgba(35,24,230,0.25);
+}
+
+.form-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--ink);
+  padding: 9px 0;
+  min-width: 0;
+}
+.form-input::placeholder { color: rgba(17,17,17,0.3); }
+
+.form-btn {
+  flex-shrink: 0;
+  background: var(--blue);
+  color: #F6F1EA;
+  border: none;
+  border-radius: 40px;
+  padding: 11px 20px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  transition: opacity .2s, transform .15s;
+  white-space: nowrap;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.form-btn:active { transform: scale(0.96); }
+.form-btn:disabled { opacity: 0.6; }
+
+.form-fine {
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+  line-height: 1.6;
+}
+
+/* spinner */
+.spinner {
+  width: 13px; height: 13px;
+  border: 2px solid rgba(246,241,234,0.4);
+  border-top-color: #F6F1EA;
+  border-radius: 50%;
+  animation: spin .7s linear infinite;
+  display: none;
+}
+
+/* ── BOTTOM MARK ── */
+.mark {
+  position: absolute;
+  bottom: 36px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  opacity: 0;
+  animation: up .7s ease .6s forwards;
+}
+.mark-line { width: 24px; height: 1px; background: var(--rule); }
+.mark-text {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+/* ── OVERLAY ── */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(17,17,17,0.5);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 200;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 0 16px calc(24px + env(safe-area-inset-bottom));
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .3s ease;
+}
+.overlay.show {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* ── PROMPT CARD ── */
+.card {
+  background: var(--card);
+  border-radius: 24px;
+  padding: 32px 26px 26px;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  transform: translateY(20px);
+  transition: transform .38s cubic-bezier(.16,1,.3,1);
+  box-shadow: 0 24px 64px rgba(0,0,0,0.18);
+}
+.overlay.show .card { transform: translateY(0); }
+
+.card-logo { margin: 0 auto 16px; }
+.card-logo svg { width: 32px; }
+
+.card-title {
+  font-family: 'p22-mackinac-pro', serif;
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 8px;
+  letter-spacing: -0.01em;
+}
+
+.card-sub {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--muted);
+  line-height: 1.65;
+  margin-bottom: 22px;
+}
+
+/* steps */
+.steps {
+  background: var(--bg);
+  border-radius: 14px;
+  padding: 16px 18px;
+  margin-bottom: 18px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+
+.step {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+}
+
+.step-n {
+  flex-shrink: 0;
+  width: 20px; height: 20px;
+  background: var(--blue);
+  color: #F6F1EA;
+  border-radius: 50%;
+  font-size: 10px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2px;
+}
+
+.step-txt {
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--ink);
+}
+.step-txt strong { font-weight: 500; }
+
+.desktop-note {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.65;
+  margin-bottom: 18px;
+  padding: 14px 16px;
+  background: var(--bg);
+  border-radius: 12px;
+}
+
+.open-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  background: var(--blue);
+  color: #F6F1EA;
+  border: none;
+  border-radius: 50px;
+  padding: 15px 20px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  text-decoration: none;
+  min-height: 50px;
+  transition: opacity .2s;
+}
+.open-btn:active { opacity: 0.85; }
+
+.skip {
+  display: block;
+  margin-top: 14px;
+  font-size: 12px;
+  color: var(--muted);
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  background: none;
+  border: none;
+  font-family: inherit;
+}
+
+/* ── ANIMATIONS ── */
+@keyframes up {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── DESKTOP ── */
+@media (min-width: 640px) {
+  .page { padding: 80px 40px; }
+  .overlay { align-items: center; padding: 0 24px; }
+  .card { border-radius: 28px; }
+}
+
+</style>
+</head>
+<body>
+
+<main class="page">
+
+  <div class="logo">
+    <svg viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path fill="#2318E6" d="M71.7,200.84s32.85-28.07,47.9-49.23c4.19,11.85,11.02,18.19,18.58,18.16,6.66-.03,12.3-2.21,28.5-20.34,3.06,19.21,9.52,20.99,12.84,21.2,9.09.58,17.59-5.24,44.16-27.05-25.54,32.42-35.15,45.9-48.83,45.56-8.99-.22-12.78-8.85-14.19-15.89-6.68,11.9-14.69,19.22-22.86,19.22s-15.72-7.31-17.06-17.35c-11.02,8.95-31.79,18.72-49.03,25.7Z"/>
+      <path fill="#2318E6" d="M76.32,158.41s32.85-28.07,47.9-49.23c4.19,11.85,11.02,18.19,18.58,18.16,6.66-.03,12.3-2.21,28.5-20.34,3.06,19.21,9.52,20.99,12.84,21.2,9.09.58,17.59-5.24,44.16-27.05-25.54,32.42-35.15,45.9-48.83,45.56-8.99-.22-12.78-8.85-14.19-15.89-6.68,11.9-14.69,19.22-22.86,19.22s-15.72-7.31-17.06-17.35c-11.02,8.95-31.79,18.72-49.03,25.7Z"/>
+    </svg>
+  </div>
+
+  <p class="wordmark">Wave</p>
+
+  <h1 class="hl">
+    Your emotional life<br>
+    moves in <em>cycles.</em><br>
+    Not straight lines.
+  </h1>
+
+  <p class="sub">Track where you are. See the patterns. Navigate the moment.</p>
+
+  <div class="form-wrap" id="form-wrap">
+    <div class="form-bar">
+      <input
+        class="form-input"
+        type="email"
+        inputmode="email"
+        autocomplete="email"
+        placeholder="your@email.com"
+        id="email-input"
+      >
+      <button class="form-btn" id="submit-btn" onclick="handleSubmit()">
+        <span id="btn-label">Get access</span>
+        <div class="spinner" id="spinner"></div>
+      </button>
+    </div>
+    <p class="form-fine">Free to use &nbsp;·&nbsp; No spam &nbsp;·&nbsp; Wave Pro at £8/mo</p>
+  </div>
+
+  <div class="mark">
+    <div class="mark-line"></div>
+    <span class="mark-text">Emotional navigation</span>
+    <div class="mark-line"></div>
+  </div>
+
+</main>
+
+<!-- ── HOME SCREEN PROMPT ── -->
+<div class="overlay" id="overlay">
+  <div class="card">
+
+    <div class="card-logo">
+      <svg viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#2318E6" d="M71.7,200.84s32.85-28.07,47.9-49.23c4.19,11.85,11.02,18.19,18.58,18.16,6.66-.03,12.3-2.21,28.5-20.34,3.06,19.21,9.52,20.99,12.84,21.2,9.09.58,17.59-5.24,44.16-27.05-25.54,32.42-35.15,45.9-48.83,45.56-8.99-.22-12.78-8.85-14.19-15.89-6.68,11.9-14.69,19.22-22.86,19.22s-15.72-7.31-17.06-17.35c-11.02,8.95-31.79,18.72-49.03,25.7Z"/>
+        <path fill="#2318E6" d="M76.32,158.41s32.85-28.07,47.9-49.23c4.19,11.85,11.02,18.19,18.58,18.16,6.66-.03,12.3-2.21,28.5-20.34,3.06,19.21,9.52,20.99,12.84,21.2,9.09.58,17.59-5.24,44.16-27.05-25.54,32.42-35.15,45.9-48.83,45.56-8.99-.22-12.78-8.85-14.19-15.89-6.68,11.9-14.69,19.22-22.86,19.22s-15.72-7.31-17.06-17.35c-11.02,8.95-31.79,18.72-49.03,25.7Z"/>
+      </svg>
+    </div>
+
+    <h2 class="card-title">You're on the wave.</h2>
+    <p class="card-sub">Save Wave to your home screen — so it's one tap away when you need it.</p>
+
+    <!-- iOS -->
+    <div class="steps" id="ios-steps">
+      <div class="step">
+        <div class="step-n">1</div>
+        <p class="step-txt">Tap the <strong>Share button ⎋</strong> at the bottom of Safari</p>
+      </div>
+      <div class="step">
+        <div class="step-n">2</div>
+        <p class="step-txt">Scroll down and tap <strong>"Add to Home Screen"</strong></p>
+      </div>
+      <div class="step">
+        <div class="step-n">3</div>
+        <p class="step-txt">Tap <strong>Add</strong> — Wave is on your phone.</p>
+      </div>
+    </div>
+
+    <!-- Android -->
+    <div class="steps" id="android-steps" style="display:none;">
+      <div class="step">
+        <div class="step-n">1</div>
+        <p class="step-txt">Tap the <strong>menu ⋮</strong> in the top right of Chrome</p>
+      </div>
+      <div class="step">
+        <div class="step-n">2</div>
+        <p class="step-txt">Tap <strong>"Add to Home screen"</strong></p>
+      </div>
+      <div class="step">
+        <div class="step-n">3</div>
+        <p class="step-txt">Tap <strong>Add</strong> — Wave is on your phone.</p>
+      </div>
+    </div>
+
+    <!-- Desktop -->
+    <div class="desktop-note" id="desktop-note" style="display:none;">
+      Open this page on your phone to save Wave to your home screen. The link is in your email.
+    </div>
+
+    <a
+      class="open-btn"
+      href="https://studio--studio-3009838304-1d5c8.us-central1.hosted.app"
+      target="_blank"
+      rel="noopener"
+    >Open Wave →</a>
+
+    <button class="skip" onclick="skipToApp()">Skip — just open the app</button>
+
+  </div>
+</div>
+
+<script>
+const APP_URL = 'https://studio--studio-3009838304-1d5c8.us-central1.hosted.app';
+
+function getDevice() {
+  const ua = navigator.userAgent;
+  if (/android/i.test(ua)) return 'android';
+  if (/iphone|ipad|ipod/i.test(ua)) return 'ios';
+  return 'desktop';
+}
+
+async function handleSubmit() {
+  const inp = document.getElementById('email-input');
+  const btn = document.getElementById('submit-btn');
+  const lbl = document.getElementById('btn-label');
+  const spn = document.getElementById('spinner');
+  const val = inp.value.trim();
+
+  if (!val.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+    inp.placeholder = 'Enter a valid email';
+    inp.value = '';
+    inp.focus();
+    return;
+  }
+
+  // Loading state
+  btn.disabled = true;
+  lbl.style.display = 'none';
+  spn.style.display = 'block';
+
+  try {
+    await window.klaviyo.push(['identify', { email: val }]);
+    await window.klaviyo.push(['track', 'Joined Waitlist', { email: val }]);
+
+    // Subscribe to list RrjiWK via Klaviyo subscribe API
+    await fetch(`https://a.klaviyo.com/client/subscriptions/?company_id=UYYzSZ`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'revision': '2024-02-15' },
+      body: JSON.stringify({
+        data: {
+          type: 'subscription',
+          attributes: {
+            profile: { data: { type: 'profile', attributes: { email: val } } },
+            custom_source: 'Wave Landing Page'
+          },
+          relationships: {
+            list: { data: { type: 'list', id: 'RrjiWK' } }
+          }
+        }
+      })
+    });
+
+    showPrompt();
+  } catch (e) {
+    // Fail gracefully — still show prompt so user gets into app
+    console.error(e);
+    showPrompt();
+  } finally {
+    btn.disabled = false;
+    lbl.style.display = 'block';
+    spn.style.display = 'none';
+  }
+}
+
+function showPrompt() {
+  const device = getDevice();
+  if (device === 'android') {
+    document.getElementById('ios-steps').style.display     = 'none';
+    document.getElementById('android-steps').style.display = 'flex';
+  } else if (device === 'desktop') {
+    document.getElementById('ios-steps').style.display     = 'none';
+    document.getElementById('desktop-note').style.display  = 'block';
+  }
+  document.getElementById('overlay').classList.add('show');
+}
+
+function skipToApp() {
+  window.open(APP_URL, '_blank', 'noopener');
+}
+
+document.getElementById('email-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter') handleSubmit();
+});
+
+document.getElementById('overlay').addEventListener('click', function(e) {
+  if (e.target === this) skipToApp();
+});
+</script>
+
+</body>
+</html>
