@@ -4,7 +4,9 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Wave</title>
 <meta name="description" content="Wave is a journal for noticing how you're doing and finding better ways to respond in the moment. Join the waitlist.">
-<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.ico" sizes="48x48">
+<link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <style>
 @font-face{font-family:"Figtree";src:url(assets/figtree.woff2) format("woff2");font-weight:400 700;font-display:swap}
 @font-face{font-family:"Space Mono";src:url(assets/spacemono.woff2) format("woff2");font-weight:400;font-display:swap}
@@ -215,7 +217,7 @@ body { margin: 0; }
   <section class="screen" id="s-login">
     <div class="center" style="min-height:100svh">
       <svg class="markg" viewBox="0 0 156.6 99.69" role="img" aria-label="Wave"><use href="#g-mark"/></svg>
-      <h1 class="hero">Wave, the journal that<span class="rot" id="rot">tracks how you feel</span></h1>
+      <h1 class="hero">Wave, a journal that<span class="rot" id="rot">moves with you</span></h1>
       <p class="mute" style="margin:12px 0 4px">Log in or create an account</p>
       <form class="col" id="emailForm" novalidate>
         <input type="hidden" name="platform" id="platform" value="iOS">
@@ -223,17 +225,17 @@ body { margin: 0; }
         <input class="field" id="email" type="email" inputmode="email" autocomplete="email" placeholder="Email address" aria-label="Email address">
         <button class="btn" id="emailGo" type="submit">Continue</button>
         <p class="fine" id="emailErr" style="color:var(--ink);display:none">Enter a valid email address.</p>
-        <p class="fine">We’ll email a link to confirm it’s you, then once when Wave is ready. No password. <a href="#" data-go="story">How your data is handled</a></p>
+        <p class="fine">We’ll email a link to confirm it’s you, then once when Wave is ready. No password. <a href="https://abiolaafolabi.github.io/wave-legal/privacy.html">Read our privacy policy</a>.</p>
       </form>
     </div>
 
     <div class="story" id="story">
       <div class="sec">
         <h2>See where you are, emotionally</h2>
-        <p class="sub">A wave that follows your ups and downs. Slide it to where you are right now.</p>
+        <p class="sub">A wave that follows your ups and downs. <span style="color:var(--accent)">Slide it to where you are right now.</span></p>
         <div class="vis card wv" id="wv" style="padding:0;position:relative;overflow:hidden">
           <button class="chipo btnchip" id="wvChip" aria-expanded="false" aria-controls="wvPop" style="position:absolute;left:16px;top:14px;z-index:2"><i></i><span id="wvName">Order</span></button>
-          <svg viewBox="0 0 320 200" width="100%" fill="none" id="wvSvg" style="touch-action:pan-y;cursor:grab;display:block" aria-label="A wave you can drag sideways" role="img"><path id="wvPath" d="" stroke="var(--ink)" stroke-width="2.6" stroke-linecap="round"/><line x1="160" y1="0" x2="160" y2="200" stroke="var(--accent)" stroke-width="1.3" opacity=".7"/><circle id="wvDot" cx="160" cy="89" r="6" fill="var(--accent)"/></svg>
+          <svg viewBox="0 0 320 200" width="100%" fill="none" id="wvSvg" style="touch-action:pan-y;cursor:grab;display:block" aria-label="A wave you can drag sideways" role="img"><path id="wvPath" d="" stroke="var(--ink)" stroke-width="1.9" stroke-linecap="round"/><line x1="160" y1="0" x2="160" y2="200" stroke="var(--accent)" stroke-width="1.1" opacity=".7"/><circle id="wvDot" cx="160" cy="89" r="4.4" fill="var(--accent)"/></svg>
           <div class="pop" id="wvPop" hidden><b id="wvPopT">Order</b><span id="wvPopB"></span></div>
         </div>
         <p class="fine" style="margin-top:-2px">Drag the wave sideways. <span style="color:var(--accent)">Tap the pill to see what it means.</span></p>
@@ -330,6 +332,7 @@ body { margin: 0; }
     $('#hdrJoin').hidden = name !== 'login';
     $('#brand').style.visibility = (name === 'login' || name === 'listed') ? 'visible' : 'hidden';
     window.scrollTo(0, 0); learnFade();
+    try { sessionStorage.setItem('wave.view', JSON.stringify({ screen: name, plat: plat })); } catch (x) {}
   }
   function back() { var p = hist.pop(); if (p) show(p, false); }
 
@@ -382,7 +385,7 @@ body { margin: 0; }
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') sheet(false); });
 
   // rotating line (what Wave does)
-  var lines = ['tracks how you feel', 'moves with you', 'finds what helps', 'stays on your phone'], li = 0;
+  var lines = ['moves with you', 'tracks how you feel', 'finds what helps', 'stays on your phone'], li = 0;
   setInterval(function () {
     var r = $('#rot'); r.classList.add('out');
     setTimeout(function () { li = (li + 1) % lines.length; r.textContent = lines[li]; r.classList.remove('out'); }, 360);
@@ -446,9 +449,17 @@ body { margin: 0; }
   var fh = ''; FAQ.forEach(function (q) { fh += '<details><summary>' + q[0] + '</summary><p>' + q[1] + (q[2] ? '<span class="sign">' + q[2] + '</span>' : '') + '</p></details>'; });
   $('#faqList').innerHTML = fh;
 
-  var saved = null; try { saved = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (x) {}
+  var saved = null, view = null;
+  try { saved = JSON.parse(localStorage.getItem(KEY) || 'null'); view = JSON.parse(sessionStorage.getItem('wave.view') || 'null'); } catch (x) {}
   show('access', false);
   if (saved && saved.email) listedFor(saved.email, saved.platform);
+  else if (view && (view.screen === 'unavail' || view.screen === 'login')) {
+    // came back from the privacy or terms page: pick up where they were
+    plat = view.plat || plat; setUnavail(); hist = ['access']; show(view.screen, false);
+    var y = 0; try { y = parseInt(sessionStorage.getItem('wave.scroll') || '0', 10) || 0; } catch (x) {}
+    if (view.screen === 'login' && y) setTimeout(function () { window.scrollTo(0, y); learnFade(); }, 60);
+  }
+  window.addEventListener('pagehide', function () { try { sessionStorage.setItem('wave.scroll', String(window.scrollY)); } catch (x) {} });
 })();
 </script>
 </body></html>
