@@ -18,7 +18,7 @@
   --ink: #F4F3EF;
   --soft: #8F8C84;
   --hair: #2E2D2B;
-  --accent: #E8665A; /* used only inside the product pictures (the playhead and phase dot) */
+  --accent: #F5463A; /* strong red: product pictures and the one instruction */
   --btn: #F4F3EF;
   --btn-ink: #131313;
   --btn2: #2C2C2D;
@@ -66,7 +66,7 @@ h2 { font-weight: 500; font-size: 26px; line-height: 1.15; letter-spacing: -.02e
 .fine { color: var(--soft); font-size: 13px; line-height: 1.45; max-width: 36ch; margin: 0 auto; }
 .fine a { color: var(--ink); text-decoration: underline; text-underline-offset: 2px; }
 .link { color: var(--ink); background: none; border: 0; cursor: pointer; font-size: 15px; text-decoration: underline; text-underline-offset: 2px; padding: 0; }
-.rot { color: var(--ink); display: block; transition: opacity .35s; }
+.rot { color: var(--ink); display: block; transition: opacity .35s; white-space: nowrap; }
 h1.hero { font-size: 31px; line-height: 1.2; }
 .rot.out { opacity: 0; }
 .pill { height: 38px; padding: 0 18px; border-radius: 999px; background: var(--btn2); border: 0; font-weight: 500; font-size: 15px; cursor: pointer; display: inline-flex; gap: 8px; align-items: center; }
@@ -103,7 +103,7 @@ h1.hero { font-size: 31px; line-height: 1.2; }
 .shots figcaption { font: 400 10px var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--soft); margin-top: 12px; }
 @media (min-width: 700px) { .shots { justify-content: center; } .shots figure { flex: 0 0 220px; } }
 .btnchip { border: 0; cursor: pointer; font: 400 10px var(--mono); }
-.pop { position: absolute; left: 14px; right: 14px; top: 56px; z-index: 3; background: var(--bg); border: 1px solid var(--hair); border-radius: 22px; padding: 16px 18px 18px; text-align: left; box-shadow: 0 10px 30px rgba(0,0,0,.25); }
+.pop { position: absolute; left: 14px; right: 14px; top: 56px; z-index: 3; background: var(--btn2); border: 1px solid var(--hair); border-radius: 22px; padding: 16px 18px 18px; text-align: left; box-shadow: 0 10px 30px rgba(0,0,0,.25); }
 .pop b { display: block; font-size: 22px; font-weight: 600; margin-bottom: 6px; letter-spacing: -.01em; }
 .pop span { color: var(--soft); font-size: 14px; line-height: 1.5; display: block; }
 .demo { position: relative; height: 230px; padding: 0; overflow: hidden; }
@@ -217,7 +217,8 @@ body { margin: 0; }
   <section class="screen" id="s-login">
     <div class="center" style="min-height:100svh">
       <svg class="markg" viewBox="0 0 156.6 99.69" role="img" aria-label="Wave"><use href="#g-mark"/></svg>
-      <h1 class="hero">Wave, a journal that<span class="rot" id="rot">moves with you</span></h1>
+      <h1 class="hero">Wave, a journal that<span class="rot" id="rot">tracks how you feel</span></h1>
+      <p class="sub" style="margin:10px 0 0;font-size:14.5px">A tool for when life knocks you off balance.</p>
       <p class="mute" style="margin:12px 0 4px">Log in or create an account</p>
       <form class="col" id="emailForm" novalidate>
         <input type="hidden" name="platform" id="platform" value="iOS">
@@ -232,17 +233,17 @@ body { margin: 0; }
     <div class="story" id="story">
       <div class="sec">
         <h2>See where you are, emotionally</h2>
-        <p class="sub">A wave that follows your ups and downs. <span style="color:var(--accent)">Slide it to where you are right now.</span></p>
-        <div class="vis card wv" id="wv" style="padding:0;position:relative;overflow:hidden">
+        <p class="sub">Feelings feel permanent when you’re inside them. The wave reminds you they move. <span style="color:var(--accent)">Slide it to where you are right now.</span></p>
+        <div class="vis card wv" id="wv" style="padding:0;position:relative">
           <button class="chipo btnchip" id="wvChip" aria-expanded="false" aria-controls="wvPop" style="position:absolute;left:16px;top:14px;z-index:2"><i></i><span id="wvName">Order</span></button>
           <svg viewBox="0 0 320 200" width="100%" fill="none" id="wvSvg" style="touch-action:pan-y;cursor:grab;display:block" aria-label="A wave you can drag sideways" role="img"><path id="wvPath" d="" stroke="var(--ink)" stroke-width="1.9" stroke-linecap="round"/><line x1="160" y1="0" x2="160" y2="200" stroke="var(--accent)" stroke-width="1.1" opacity=".7"/><circle id="wvDot" cx="160" cy="89" r="4.4" fill="var(--accent)"/></svg>
           <div class="pop" id="wvPop" hidden><b id="wvPopT">Order</b><span id="wvPopB"></span></div>
         </div>
-        <p class="fine" style="margin-top:-2px">Drag the wave sideways. <span style="color:var(--accent)">Tap the pill to see what it means.</span></p>
+        <p class="fine" style="margin-top:-2px">Drag the wave sideways. Tap the pill to see what it means.</p>
       </div>
       <div class="sec">
         <h2>Log how you feel in seconds</h2>
-        <p class="sub">Slide to where you are, tap +, add a line if you like. That’s all.</p>
+        <p class="sub">Tap<span style="display:inline-grid;place-items:center;width:21px;height:21px;border-radius:50%;background:var(--btn);color:var(--btn-ink);vertical-align:-3px;margin:0 3px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>and add a line if you like.</p>
         <div class="vis card demo" id="demo" aria-hidden="true">
           <div class="dlog" id="dLog"><div class="mono">New log · Thursday</div><div class="dtxt" id="dTxt"></div><div class="dchk" id="dChk"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></div></div>
           <div class="dsaved" id="dSaved"><div class="mono">Thursday · 9:41</div><div style="font-weight:700;font-size:18px;margin:6px 0 4px">Steady morning</div><div style="color:var(--soft);font-size:14px">Clear head, slept well.</div><div style="margin-top:12px"><span class="chipo"><i></i>Order</span></div></div>
@@ -250,12 +251,12 @@ body { margin: 0; }
         </div>
       </div>
       <div class="sec">
-        <h2>A skill for the moment</h2>
-        <p class="sub">When things feel loud, a short exercise to come back down, or a new way to see it.</p>
+        <h2>Something to reach for</h2>
+        <p class="sub">When things feel like too much, a short exercise to regulate, or a new way to see it.</p>
         <div class="vis card" style="text-align:center;padding:30px 24px">
           <div class="mono">Regulate · Chaos</div>
           <div style="font-weight:800;font-size:25px;letter-spacing:-.02em;margin:12px 0 10px">The Physiological Sigh</div>
-          <div style="color:var(--soft);font-size:14.5px;line-height:1.5">Two inhales through the nose, one long exhale. The fastest evidence-based way down from acute stress.</div>
+          <div style="color:var(--soft);font-size:14.5px;line-height:1.5">Two inhales through the nose, one long exhale. One of the quickest evidence-based ways to settle acute stress.</div>
         </div>
       </div>
       <div class="sec">
@@ -283,7 +284,7 @@ body { margin: 0; }
       <div id="faqList"></div>
     </div>
     <div class="final">
-      <h2>Ready to try Wave?</h2>
+      <h2>For the next time life knocks you sideways.</h2>
       <button class="btn" id="toTop">Join the waitlist</button>
     </div>
     <div class="foot"><div>© Wave 2026</div><nav><a href="https://abiolaafolabi.github.io/wave-legal/privacy.html">Privacy Policy</a><a href="https://abiolaafolabi.github.io/wave-legal/terms.html">Terms</a><a href="https://abiolaafolabi.github.io/wave-legal/disclaimer.html">Disclaimer</a></nav></div>
@@ -385,7 +386,7 @@ body { margin: 0; }
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') sheet(false); });
 
   // rotating line (what Wave does)
-  var lines = ['moves with you', 'tracks how you feel', 'finds what helps', 'stays on your phone'], li = 0;
+  var lines = ['tracks how you feel', 'finds what helps', 'helps you zoom out', 'brings perspective'], li = 0;
   setInterval(function () {
     var r = $('#rot'); r.classList.add('out');
     setTimeout(function () { li = (li + 1) % lines.length; r.textContent = lines[li]; r.classList.remove('out'); }, 360);
